@@ -1,8 +1,8 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.TextCore.Text;
 
 
-namespace UnityEditor.TextCore
+namespace UnityEditor.TextCore.Text
 {
     [CustomEditor(typeof(TextColorGradient))]
     public class TextColorGradientEditor : Editor

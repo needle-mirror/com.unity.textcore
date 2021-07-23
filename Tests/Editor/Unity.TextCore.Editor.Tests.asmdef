@@ -3,6 +3,7 @@
     "rootNamespace": "",
     "references": [
         "Unity.TextCore",
+        "UnityEngine.TextCoreTextEngineModule",
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner"
     ],

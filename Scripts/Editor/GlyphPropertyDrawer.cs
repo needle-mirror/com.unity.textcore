@@ -1,15 +1,14 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.TextCore.Text;
 using UnityEngine.TextCore.LowLevel;
 
 using Glyph = UnityEngine.TextCore.Glyph;
 
 
-namespace UnityEditor.TextCore
+namespace UnityEditor.TextCore.Text
 {
-
     [CustomPropertyDrawer(typeof(Glyph))]
-    public class GlyphPropertyDrawer : PropertyDrawer
+    internal class GlyphPropertyDrawer : PropertyDrawer
     {
         private string k_ColorProperty = "_Color";
 
@@ -53,21 +52,26 @@ namespace UnityEditor.TextCore
 
         void DrawGlyph(Rect position, SerializedProperty property)
         {
-            // Get a reference to the sprite texture
-            FontAsset fontAsset = property.serializedObject.targetObject as FontAsset;
+            // Serialized object can either be a FontAsset or a TMP_FontAsset
+            SerializedObject so = property.serializedObject;
 
-            if (fontAsset == null)
+            if (so == null)
                 return;
 
-            // Get reference to atlas texture.
+            // Get reference to the atlas texture for the given atlas index.
             int atlasIndex = property.FindPropertyRelative("m_AtlasIndex").intValue;
-            Texture2D atlasTexture = fontAsset.atlasTextures.Length > atlasIndex ? fontAsset.atlasTextures[atlasIndex] : null;
 
+            SerializedProperty atlasTextureProperty = so.FindProperty("m_AtlasTextures");
+            Texture2D atlasTexture = atlasTextureProperty.GetArrayElementAtIndex(atlasIndex).objectReferenceValue as Texture2D;
             if (atlasTexture == null)
                 return;
 
             Material mat;
-            if (((GlyphRasterModes)fontAsset.atlasRenderMode & GlyphRasterModes.RASTER_MODE_BITMAP) == GlyphRasterModes.RASTER_MODE_BITMAP)
+
+            GlyphRenderMode atlasRenderMode = (GlyphRenderMode)so.FindProperty("m_AtlasRenderMode").intValue;
+            int atlasPadding = so.FindProperty("m_AtlasPadding").intValue;
+
+            if (((GlyphRasterModes)atlasRenderMode & GlyphRasterModes.RASTER_MODE_BITMAP) == GlyphRasterModes.RASTER_MODE_BITMAP)
             {
                 mat = FontAssetEditor.internalBitmapMaterial;
 
@@ -85,7 +89,7 @@ namespace UnityEditor.TextCore
                     return;
 
                 mat.mainTexture = atlasTexture;
-                mat.SetFloat(TextShaderUtilities.ID_GradientScale, fontAsset.atlasPadding + 1);
+                mat.SetFloat(TextShaderUtilities.ID_GradientScale, atlasPadding + 1);
             }
 
             // Draw glyph from atlas texture.
@@ -93,14 +97,19 @@ namespace UnityEditor.TextCore
 
             SerializedProperty glyphRectProperty = property.FindPropertyRelative("m_GlyphRect");
 
-            int padding = fontAsset.atlasPadding;
+            int padding = atlasPadding;
+            int padding2X = padding * 2;
 
             int glyphOriginX = glyphRectProperty.FindPropertyRelative("m_X").intValue - padding;
             int glyphOriginY = glyphRectProperty.FindPropertyRelative("m_Y").intValue - padding;
-            int glyphWidth = glyphRectProperty.FindPropertyRelative("m_Width").intValue + padding * 2;
-            int glyphHeight = glyphRectProperty.FindPropertyRelative("m_Height").intValue + padding * 2;
+            int glyphWidth = glyphRectProperty.FindPropertyRelative("m_Width").intValue + padding2X;
+            int glyphHeight = glyphRectProperty.FindPropertyRelative("m_Height").intValue + padding2X;
 
-            float normalizedHeight = fontAsset.faceInfo.ascentLine - fontAsset.faceInfo.descentLine;
+            SerializedProperty faceInfoProperty = so.FindProperty("m_FaceInfo");
+            float ascentLine = faceInfoProperty.FindPropertyRelative("m_AscentLine").floatValue;
+            float descentLine = faceInfoProperty.FindPropertyRelative("m_DescentLine").floatValue;
+
+            float normalizedHeight = ascentLine - descentLine;
             float scale = glyphDrawPosition.width / normalizedHeight;
 
             // Compute the normalized texture coordinates
@@ -117,6 +126,5 @@ namespace UnityEditor.TextCore
                 Graphics.DrawTexture(glyphDrawPosition, atlasTexture, texCoords, 0, 0, 0, 0, new Color(1f, 1f, 1f), mat);
             }
         }
-
     }
 }

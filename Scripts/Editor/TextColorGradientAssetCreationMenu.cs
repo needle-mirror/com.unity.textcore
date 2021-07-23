@@ -1,18 +1,17 @@
-﻿using System.IO;
+using System.IO;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
 
 
-namespace UnityEditor.TextCore
+namespace UnityEditor.TextCore.Text
 {
-
-    public static class TextColorGradientAssetCreationMenu
+    internal static class TextColorGradientAssetCreationMenu
     {
         #if TEXTMESHPRO_4_0_OR_NEWER
         [MenuItem("Assets/Create/TextMeshPro/Color Gradient", false, 250)]
         #endif
         [MenuItem("Assets/Create/Text/Color Gradient", false, 250)]
-        public static void CreateColorGradient(MenuCommand context)
+        internal static void CreateColorGradient(MenuCommand context)
         {
             string filePath;
 

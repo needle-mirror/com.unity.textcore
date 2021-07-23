@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 
 
 namespace UnityEngine.TextCore.Text
@@ -100,7 +100,12 @@ namespace UnityEngine.TextCore.Text
             {
                 // TODO: Should reference internal SSD shader
                 if (k_ShaderRef_MobileSDF == null)
+                {
                     k_ShaderRef_MobileSDF = Shader.Find("Text/Mobile/Distance Field SSD");
+
+                    if (k_ShaderRef_MobileSDF == null)
+                        k_ShaderRef_MobileSDF = Shader.Find("Hidden/TextCore/Distance Field SSD");
+                }
 
                 return k_ShaderRef_MobileSDF;
             }
@@ -116,7 +121,12 @@ namespace UnityEngine.TextCore.Text
             {
                 // TODO: Should reference internal bitmap shader
                 if (k_ShaderRef_MobileBitmap == null)
+                {
                     k_ShaderRef_MobileBitmap = Shader.Find("Text/Bitmap");
+
+                    if (k_ShaderRef_MobileBitmap == null)
+                        k_ShaderRef_MobileBitmap = Shader.Find("Hidden/Internal-GUITextureClipText");
+                }
 
                 return k_ShaderRef_MobileBitmap;
             }
@@ -135,7 +145,7 @@ namespace UnityEngine.TextCore.Text
         /// <summary>
         ///
         /// </summary>
-        public static void GetShaderPropertyIDs()
+        internal static void GetShaderPropertyIDs()
         {
             if (isInitialized == false)
             {
@@ -212,18 +222,16 @@ namespace UnityEngine.TextCore.Text
                 ID_ScaleRatio_C = Shader.PropertyToID("_ScaleRatioC");
 
                 // Set internal shader references
-                if (k_ShaderRef_MobileSDF == null)
-                    k_ShaderRef_MobileSDF = Shader.Find("Text/Mobile/Distance Field");
+                //if (k_ShaderRef_MobileSDF == null)
+                //    k_ShaderRef_MobileSDF = Shader.Find("Text/Mobile/Distance Field");
 
-                if (k_ShaderRef_MobileBitmap == null)
-                    k_ShaderRef_MobileBitmap = Shader.Find("Text/Bitmap");
+                //if (k_ShaderRef_MobileBitmap == null)
+                //    k_ShaderRef_MobileBitmap = Shader.Find("Text/Bitmap");
             }
         }
 
-
-
         // Scale Ratios to ensure property ranges are optimum in Material Editor
-        public static void UpdateShaderRatios(Material mat)
+        static void UpdateShaderRatios(Material mat)
         {
             //Debug.Log("UpdateShaderRatios() called.");
 
@@ -252,7 +260,7 @@ namespace UnityEngine.TextCore.Text
 
             // Only set the ratio if it has changed.
             //if (ratio_A != ratio_A_old)
-                mat.SetFloat(ID_ScaleRatio_A, ratio_A);
+            mat.SetFloat(ID_ScaleRatio_A, ratio_A);
 
             // Compute Ratio B
             if (mat.HasProperty(ID_GlowOffset))
@@ -269,7 +277,7 @@ namespace UnityEngine.TextCore.Text
 
                 // Only set the ratio if it has changed.
                 //if (ratio_B != ratio_B_old)
-                    mat.SetFloat(ID_ScaleRatio_B, ratio_B);
+                mat.SetFloat(ID_ScaleRatio_B, ratio_B);
             }
 
             // Compute Ratio C
@@ -289,14 +297,12 @@ namespace UnityEngine.TextCore.Text
 
                 // Only set the ratio if it has changed.
                 //if (ratio_C != ratio_C_old)
-                    mat.SetFloat(ID_ScaleRatio_C, ratio_C);
+                mat.SetFloat(ID_ScaleRatio_C, ratio_C);
             }
         }
 
-
-
         // Function to calculate padding required for Outline Width & Dilation for proper text alignment
-        public static Vector4 GetFontExtent(Material material)
+        internal static Vector4 GetFontExtent(Material material)
         {
             // Revised implementation where style no longer affects alignment
             return Vector4.zero;
@@ -316,9 +322,8 @@ namespace UnityEngine.TextCore.Text
             */
         }
 
-
         // Function to check if Masking is enabled
-        public static bool IsMaskingEnabled(Material material)
+        internal static bool IsMaskingEnabled(Material material)
         {
             if (material == null || !material.HasProperty(TextShaderUtilities.ID_ClipRect))
                 return false;
@@ -329,9 +334,8 @@ namespace UnityEngine.TextCore.Text
             return false;
         }
 
-
         // Function to determine how much extra padding is required as a result of material properties like dilate, outline thickness, softness, glow, etc...
-        public static float GetPadding(Material material, bool enableExtraPadding, bool isBold)
+        internal static float GetPadding(Material material, bool enableExtraPadding, bool isBold)
         {
             //Debug.Log("GetPadding() called.");
 
@@ -450,9 +454,8 @@ namespace UnityEngine.TextCore.Text
             return uniformPadding + 4; //+ 1.25f;
         }
 
-
         // Function to determine how much extra padding is required as a result of material properties like dilate, outline thickness, softness, glow, etc...
-        public static float GetPadding(Material[] materials, bool enableExtraPadding, bool isBold)
+        internal static float GetPadding(Material[] materials, bool enableExtraPadding, bool isBold)
         {
             //Debug.Log("GetPadding() called.");
 
@@ -552,7 +555,6 @@ namespace UnityEngine.TextCore.Text
                 maxPadding.y = maxPadding.y < padding.y ? padding.y : maxPadding.y;
                 maxPadding.z = maxPadding.z < padding.z ? padding.z : maxPadding.z;
                 maxPadding.w = maxPadding.w < padding.w ? padding.w : maxPadding.w;
-
             }
 
             float gradientScale = materials[0].GetFloat(TextShaderUtilities.ID_GradientScale);
@@ -565,8 +567,5 @@ namespace UnityEngine.TextCore.Text
 
             return uniformPadding + 0.25f;
         }
-
-
     }
-
 }

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.TextCore.Text;
 using UnityEngine.TextCore.LowLevel;
 
@@ -6,11 +6,10 @@ using Glyph = UnityEngine.TextCore.Glyph;
 using GlyphRect = UnityEngine.TextCore.GlyphRect;
 
 
-namespace UnityEditor.TextCore
+namespace UnityEditor.TextCore.Text
 {
-
     [CustomPropertyDrawer(typeof(GlyphPairAdjustmentRecord))]
-    public class GlyphPairAdjustmentRecordPropertyDrawer : PropertyDrawer
+    internal class GlyphPairAdjustmentRecordPropertyDrawer : PropertyDrawer
     {
         private bool isEditingEnabled = false;
         private bool isSelectable = false;
@@ -118,7 +117,6 @@ namespace UnityEditor.TextCore
                 EditorGUI.PropertyField(rect, prop_FirstGlyphIndex, new GUIContent("ID:"));
                 if (EditorGUI.EndChangeCheck())
                 {
-
                 }
 
                 GUI.enabled = isEditingEnabled;
@@ -136,7 +134,6 @@ namespace UnityEditor.TextCore
 
                 //rect.x += width * 0.5f;
                 //EditorGUI.PropertyField(rect, prop_FirstGlyphAdjustment.FindPropertyRelative("m_YAdvance"), new GUIContent("AY"));
-
             }
 
 
@@ -204,7 +201,6 @@ namespace UnityEditor.TextCore
                 EditorGUI.PropertyField(rect, prop_SecondGlyphIndex, new GUIContent("ID:"));
                 if (EditorGUI.EndChangeCheck())
                 {
-
                 }
 
                 GUI.enabled = isEditingEnabled;
@@ -242,7 +238,6 @@ namespace UnityEditor.TextCore
                     prop_FontFeatureLookupFlags.intValue = (int)flags;
                 }
             }
-
         }
 
         bool ValidateInput(string source)
@@ -300,7 +295,7 @@ namespace UnityEditor.TextCore
             return false;
         }
 
-        uint GetUnicodeCharacter (string source)
+        uint GetUnicodeCharacter(string source)
         {
             uint unicode;
 
@@ -385,7 +380,5 @@ namespace UnityEditor.TextCore
                 Graphics.DrawTexture(glyphDrawPosition, atlasTexture, texCoords, 0, 0, 0, 0, new Color(1f, 1f, 1f), mat);
             }
         }
-
-
     }
 }

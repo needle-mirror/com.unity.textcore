@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
 
-namespace UnityEditor.TextCore
+namespace UnityEditor.TextCore.Text
 {
     internal static class TM_EditorStyles
     {
@@ -38,9 +38,9 @@ namespace UnityEditor.TextCore
 
             // Labels
             panelTitle = new GUIStyle(EditorStyles.label) { fontStyle = FontStyle.Bold };
-            label = leftLabel = new GUIStyle(EditorStyles.label) { alignment = TextAnchor.MiddleLeft, richText = true };
-            centeredLabel = new GUIStyle(EditorStyles.label) { alignment = TextAnchor.MiddleCenter, richText = true };
-            rightLabel = new GUIStyle(EditorStyles.label) { alignment = TextAnchor.MiddleRight, richText = true };
+            label = leftLabel = new GUIStyle(EditorStyles.label) { alignment = TextAnchor.MiddleLeft, richText = true, wordWrap = true, stretchWidth = true };
+            centeredLabel = new GUIStyle(EditorStyles.label) { alignment = TextAnchor.MiddleCenter, richText = true, wordWrap = true, stretchWidth = true };
+            rightLabel = new GUIStyle(EditorStyles.label) { alignment = TextAnchor.MiddleRight, richText = true, wordWrap = true, stretchWidth = true };
 
             textAreaBoxWindow = new GUIStyle(EditorStyles.textArea) { richText = true };
         }
@@ -79,7 +79,6 @@ namespace UnityEditor.TextCore
 
                     first = last = characterSet[i];
                 }
-
             }
 
             // handle the final group
@@ -121,7 +120,6 @@ namespace UnityEditor.TextCore
 
                     first = last = characterSet[i];
                 }
-
             }
 
             // handle the final group
@@ -162,7 +160,6 @@ namespace UnityEditor.TextCore
 
             return refs.ToArray();
         }
-
 
         /// <summary>
         ///

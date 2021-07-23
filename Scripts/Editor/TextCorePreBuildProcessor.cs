@@ -1,10 +1,10 @@
-﻿using UnityEngine.TextCore.Text;
+using UnityEngine.TextCore.Text;
 using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
 
-namespace UnityEditor.TextCore
+namespace UnityEditor.TextCore.Text
 {
-    public class TextCorePreBuildProcessor : IPreprocessBuildWithReport
+    internal class TextCorePreBuildProcessor : IPreprocessBuildWithReport
     {
         public int callbackOrder { get { return 0; } }
 
@@ -19,7 +19,7 @@ namespace UnityEditor.TextCore
                 string fontAssetPath = AssetDatabase.GUIDToAssetPath(fontAssetGUIDs[i]);
                 FontAsset fontAsset = AssetDatabase.LoadAssetAtPath<FontAsset>(fontAssetPath);
 
-                if (fontAsset != null && fontAsset.atlasPopulationMode == AtlasPopulationMode.Dynamic && fontAsset.clearDynamicDataOnBuild && fontAsset.atlasTexture.width != 0)
+                if (fontAsset != null && (fontAsset.atlasPopulationMode == AtlasPopulationMode.Dynamic || fontAsset.atlasPopulationMode == AtlasPopulationMode.DynamicOS) && fontAsset.clearDynamicDataOnBuild && fontAsset.atlasTexture.width != 0)
                 {
                     //Debug.Log("Clearing [" + fontAsset.name + "] dynamic font asset data.");
                     fontAsset.ClearFontAssetDataInternal();

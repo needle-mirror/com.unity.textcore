@@ -98,7 +98,7 @@ namespace UnityEngine.TextCore.Text
         internal void ClearLineInfo()
         {
             if (lineInfo == null)
-                lineInfo = new LineInfo[2];
+                lineInfo = new LineInfo[1];
 
             for (int i = 0; i < lineInfo.Length; i++)
             {
@@ -106,15 +106,18 @@ namespace UnityEngine.TextCore.Text
                 lineInfo[i].spaceCount = 0;
                 lineInfo[i].wordCount = 0;
                 lineInfo[i].controlCharacterCount = 0;
-                lineInfo[i].width = 0;
 
                 lineInfo[i].ascender = s_InfinityVectorNegative.x;
+                lineInfo[i].baseline = 0;
                 lineInfo[i].descender = s_InfinityVectorPositive.x;
+                lineInfo[i].maxAdvance = 0;
+
+                lineInfo[i].marginLeft = 0;
+                lineInfo[i].marginRight = 0;
 
                 lineInfo[i].lineExtents.min = s_InfinityVectorPositive;
                 lineInfo[i].lineExtents.max = s_InfinityVectorNegative;
-
-                lineInfo[i].maxAdvance = 0;
+                lineInfo[i].width = 0;
             }
         }
 

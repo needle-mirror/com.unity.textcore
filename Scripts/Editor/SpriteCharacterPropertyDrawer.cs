@@ -1,12 +1,11 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.TextCore.Text;
 
 
-namespace UnityEditor.TextCore
+namespace UnityEditor.TextCore.Text
 {
-
     [CustomPropertyDrawer(typeof(SpriteCharacter))]
-    public class SpriteCharacterPropertyDrawer : PropertyDrawer
+    internal class SpriteCharacterPropertyDrawer : PropertyDrawer
     {
         int m_GlyphSelectedForEditing = -1;
 
@@ -158,12 +157,10 @@ namespace UnityEditor.TextCore
             }
         }
 
-
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
             return 58;
         }
-
 
         void DrawSpriteGlyph(Rect position, SerializedProperty property)
         {
@@ -220,6 +217,5 @@ namespace UnityEditor.TextCore
                 GUI.DrawTextureWithTexCoords(new Rect(spriteTexPosition.x + alignmentOffset.x, spriteTexPosition.y + alignmentOffset.y, spriteSize.x, spriteSize.y), tex, texCoords, true);
             }
         }
-
     }
 }

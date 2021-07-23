@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 
 namespace UnityEngine.TextCore.Text
@@ -145,7 +145,7 @@ namespace UnityEngine.TextCore.Text
         /// <returns></returns>
         internal static uint ConvertToUTF32(uint highSurrogate, uint lowSurrogate)
         {
-            return ((highSurrogate - Unicode.HIGH_SURROGATE_START) * 0x400) + ((lowSurrogate - Unicode.LOW_SURROGATE_START) + Unicode.UNICODE_PLANE01_START);
+            return ((highSurrogate - UnicodeCodePoint.HIGH_SURROGATE_START) * 0x400) + ((lowSurrogate - UnicodeCodePoint.LOW_SURROGATE_START) + UnicodeCodePoint.UNICODE_PLANE01_START);
         }
 
         /// <summary>

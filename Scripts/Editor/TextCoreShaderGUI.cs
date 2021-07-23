@@ -1,8 +1,8 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.TextCore.Text;
 
 
-namespace UnityEditor.TextCore
+namespace UnityEditor.TextCore.Text
 {
     /// <summary>Base class for TextMesh Pro shader GUIs.</summary>
     public abstract class TextCoreShaderGUI : ShaderGUI
@@ -122,8 +122,6 @@ namespace UnityEditor.TextCore
         }
 
         bool m_IsNewGUI = true;
-
-        float m_DragAndDropMinY;
 
         protected MaterialEditor m_Editor;
 

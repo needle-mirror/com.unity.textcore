@@ -4,9 +4,8 @@ using UnityEditorInternal;
 using System.Collections.Generic;
 
 
-namespace UnityEditor.TextCore
+namespace UnityEditor.TextCore.Text
 {
-
     [CustomEditor(typeof(SpriteAsset))]
     public class TextSpriteAssetEditor : Editor
     {
@@ -92,10 +91,8 @@ namespace UnityEditor.TextCore
             };
         }
 
-
         public override void OnInspectorGUI()
         {
-
             //Debug.Log("OnInspectorGUI Called.");
             Event currentEvent = Event.current;
             string evt_cmd = currentEvent.commandName; // Get Current Event CommandName to check for Undo Events
@@ -352,8 +349,6 @@ namespace UnityEditor.TextCore
 
                                 return;
                             }
-
-
                         }
                     }
                 }
@@ -397,7 +392,6 @@ namespace UnityEditor.TextCore
                 GUI.changed = old_ChangedState;
                 */
                 #endregion
-
             }
             #endregion
 
@@ -598,8 +592,6 @@ namespace UnityEditor.TextCore
 
                                 return;
                             }
-
-
                         }
                     }
                 }
@@ -641,7 +633,6 @@ namespace UnityEditor.TextCore
                 #endregion
 
                 GUI.changed = old_ChangedState;
-
             }
             #endregion
 
@@ -661,9 +652,7 @@ namespace UnityEditor.TextCore
             GUI.enabled = true;
             if (currentEvent.type == EventType.MouseDown && currentEvent.button == 0)
                 m_selectedElement = -1;
-
         }
-
 
         /// <summary>
         ///
@@ -707,7 +696,6 @@ namespace UnityEditor.TextCore
 
             GUI.enabled = true;
         }
-
 
         /// <summary>
         /// Method to update the properties of all sprites
@@ -755,7 +743,6 @@ namespace UnityEditor.TextCore
 
             return false;
         }
-
 
         /// <summary>
         /// Swap the sprite item at the currently selected array index to another index.
@@ -825,7 +812,6 @@ namespace UnityEditor.TextCore
             // TODO: Need to handle switching pages if the character or glyph is moved to a different page.
         }
 
-
         /// <summary>
         ///
         /// </summary>
@@ -869,7 +855,6 @@ namespace UnityEditor.TextCore
             dstGlyph.FindPropertyRelative("m_Scale").floatValue = srcGlyph.FindPropertyRelative("m_Scale").floatValue;
             dstGlyph.FindPropertyRelative("m_AtlasIndex").intValue = srcGlyph.FindPropertyRelative("m_AtlasIndex").intValue;
         }
-
 
         /// <summary>
         ///
@@ -947,6 +932,5 @@ namespace UnityEditor.TextCore
                 }
             }
         }
-
     }
 }

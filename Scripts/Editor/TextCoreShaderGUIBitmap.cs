@@ -1,7 +1,7 @@
-﻿using UnityEngine.TextCore.Text;
+using UnityEngine.TextCore.Text;
 
 
-namespace UnityEditor.TextCore
+namespace UnityEditor.TextCore.Text
 {
     public class TextCoreShaderGUIBitmap : TextCoreShaderGUI
     {

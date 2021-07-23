@@ -1,10 +1,10 @@
-﻿using System.IO;
+using System.IO;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
 
-namespace UnityEditor.TextCore
+namespace UnityEditor.TextCore.Text
 {
-    public class TextCoreContextMenuItems : Editor
+    internal class TextCoreContextMenuItems : Editor
     {
         private static Texture m_copiedTexture;
         private static Material m_copiedProperties;
@@ -102,7 +102,6 @@ namespace UnityEditor.TextCore
             m_copiedAtlasProperties = new Material(mat);
             m_copiedAtlasProperties.hideFlags = HideFlags.DontSave;
         }
-
 
         // This function is used for debugging and fixing potentially broken font atlas links
         [MenuItem("CONTEXT/Material/Paste Atlas", true, 2001)]

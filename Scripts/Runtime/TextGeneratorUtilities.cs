@@ -587,7 +587,7 @@ namespace UnityEngine.TextCore.Text
 
             for (int i = 0; i < tag.Length; i++)
             {
-                if (TextCore.TextUtilities.ToUpperFast(text[index + i]) != tag[i])
+                if (TextUtilities.ToUpperFast(text[index + i]) != tag[i])
                     return false;
             }
 
@@ -608,7 +608,7 @@ namespace UnityEngine.TextCore.Text
 
             for (int i = 0; i < tag.Length; i++)
             {
-                if (TextCore.TextUtilities.ToUpperFast((char)text[index + i]) != tag[i])
+                if (TextUtilities.ToUpperFast((char)text[index + i]) != tag[i])
                     return false;
             }
 
@@ -916,7 +916,7 @@ namespace UnityEngine.TextCore.Text
                     break;
                 }
 
-                hashCode = (hashCode << 5) + hashCode ^ (int)TextCore.TextUtilities.ToUpperASCIIFast((char)text[i]);
+                hashCode = (hashCode << 5) + hashCode ^ (int)TextUtilities.ToUpperASCIIFast((char)text[i]);
             }
 
             return hashCode;
@@ -947,7 +947,7 @@ namespace UnityEngine.TextCore.Text
                     break;
                 }
 
-                hashCode = (hashCode << 5) + hashCode ^ (int)TextCore.TextUtilities.ToUpperASCIIFast(text[i]);
+                hashCode = (hashCode << 5) + hashCode ^ (int)TextUtilities.ToUpperASCIIFast(text[i]);
             }
 
             return hashCode;

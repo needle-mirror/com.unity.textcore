@@ -1,4 +1,4 @@
-﻿Shader "Hidden/Text/Internal/Editor/Distance Field SSD" {
+Shader "Hidden/TextCore/Distance Field SSD" {
 
     Properties{
         _FaceColor("Face Color", Color) = (1,1,1,1)

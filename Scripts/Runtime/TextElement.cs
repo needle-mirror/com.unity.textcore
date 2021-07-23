@@ -1,12 +1,12 @@
-﻿using System;
+using System;
 
 
 namespace UnityEngine.TextCore.Text
 {
     public enum TextElementType : byte
     {
-         Character   = 0x1,
-         Sprite      = 0x2,
+        Character   = 0x1,
+        Sprite      = 0x2,
     }
 
     /// <summary>

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.Scripting.APIUpdating;
 using UnityEngine.Serialization;
@@ -86,14 +86,14 @@ namespace UnityEngine.TextCore.Text
         internal bool m_IsSpriteAssetLookupTablesDirty = false;
 
 
-        void Awake(){}
+        void Awake() {}
 
 
         /// <summary>
         /// Create a material for the sprite asset.
         /// </summary>
         /// <returns></returns>
-        Material GetDefaultSpriteMaterial()
+        /*Material GetDefaultSpriteMaterial()
         {
             //isEditingAsset = true;
             TextShaderUtilities.GetShaderPropertyIDs();
@@ -111,7 +111,7 @@ namespace UnityEngine.TextCore.Text
             //isEditingAsset = false;
 
             return tempMaterial;
-        }
+        }*/
 
 
         /// <summary>
@@ -180,7 +180,7 @@ namespace UnityEngine.TextCore.Text
                 spriteCharacter.glyph = m_SpriteGlyphLookup[glyphIndex];
                 spriteCharacter.textAsset = this;
 
-                int nameHashCode = m_SpriteCharacterTable[i].hashCode;
+                int nameHashCode = TextUtilities.GetHashCodeCaseInSensitive(m_SpriteCharacterTable[i].name);
 
                 if (m_NameLookup.ContainsKey(nameHashCode) == false)
                     m_NameLookup.Add(nameHashCode, i);
@@ -193,7 +193,6 @@ namespace UnityEngine.TextCore.Text
 
             m_IsSpriteAssetLookupTablesDirty = false;
         }
-
 
         /// <summary>
         /// Function which returns the sprite index using the hashcode of the name
@@ -213,13 +212,12 @@ namespace UnityEngine.TextCore.Text
             return -1;
         }
 
-
         /// <summary>
         /// Returns the index of the sprite for the given unicode value.
         /// </summary>
         /// <param name="unicode"></param>
         /// <returns></returns>
-        public int GetSpriteIndexFromUnicode (uint unicode)
+        public int GetSpriteIndexFromUnicode(uint unicode)
         {
             if (m_SpriteCharacterLookup == null)
                 UpdateLookupTables();
@@ -232,13 +230,12 @@ namespace UnityEngine.TextCore.Text
             return -1;
         }
 
-
         /// <summary>
         /// Returns the index of the sprite for the given name.
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public int GetSpriteIndexFromName (string name)
+        public int GetSpriteIndexFromName(string name)
         {
             if (m_NameLookup == null)
                 UpdateLookupTables();
@@ -247,7 +244,6 @@ namespace UnityEngine.TextCore.Text
 
             return GetSpriteIndexFromHashcode(hashCode);
         }
-
 
         /// <summary>
         /// Used to keep track of which Sprite Assets have been searched.
@@ -294,7 +290,6 @@ namespace UnityEngine.TextCore.Text
             return null;
         }
 
-
         /// <summary>
         /// Search through the given list of sprite assets and fallbacks for a sprite whose unicode value matches the target unicode.
         /// </summary>
@@ -326,7 +321,6 @@ namespace UnityEngine.TextCore.Text
             return null;
         }
 
-
         /// <summary>
         /// Search the given sprite asset and fallbacks for a sprite whose unicode value matches the target unicode.
         /// </summary>
@@ -349,7 +343,6 @@ namespace UnityEngine.TextCore.Text
             spriteIndex = -1;
             return null;
         }
-
 
         /// <summary>
         /// Search the given sprite asset and fallbacks for a sprite whose hash code value of its name matches the target hash code.
@@ -440,7 +433,6 @@ namespace UnityEngine.TextCore.Text
             return null;
         }
 
-
         /// <summary>
         ///  Search through the given list of sprite assets and fallbacks for a sprite whose hash code value of its name matches the target hash code.
         /// </summary>
@@ -473,7 +465,6 @@ namespace UnityEngine.TextCore.Text
             return null;
         }
 
-
         /// <summary>
         /// Search through the given sprite asset and fallbacks for a sprite whose hash code value of its name matches the target hash code.
         /// </summary>
@@ -495,7 +486,6 @@ namespace UnityEngine.TextCore.Text
             spriteIndex = -1;
             return null;
         }
-
 
         /// <summary>
         /// Sort the sprite glyph table by glyph index.
@@ -524,6 +514,5 @@ namespace UnityEngine.TextCore.Text
             SortGlyphTable();
             SortCharacterTable();
         }
-
     }
 }

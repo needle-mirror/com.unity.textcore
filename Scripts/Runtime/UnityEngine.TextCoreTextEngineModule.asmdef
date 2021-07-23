@@ -1,23 +1,26 @@
 {
-    "name": "Unity.TextCore.Editor",
+    "name": "UnityEngine.TextCoreTextEngineModule",
     "rootNamespace": "",
-    "references": [
-        "GUID:ad2d9f59e5f361a468fa148afe12b1f4"
-    ],
-    "includePlatforms": [
-        "Editor"
-    ],
+    "references": [],
+    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
     "precompiledReferences": [],
     "autoReferenced": true,
-    "defineConstraints": [],
+    "defineConstraints": [
+        "TEXTCORE_PACKAGE"
+    ],
     "versionDefines": [
         {
             "name": "com.unity.textmeshpro",
             "expression": "4.0.0-preview.0",
             "define": "TEXTMESHPRO_4_0_OR_NEWER"
+        },
+        {
+            "name": "com.unity.textcore",
+            "expression": "",
+            "define": "TEXTCORE_PACKAGE"
         }
     ],
     "noEngineReferences": false

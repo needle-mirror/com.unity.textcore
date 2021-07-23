@@ -8,7 +8,7 @@ namespace UnityEditor.TextCore.Text
     static class TextSettingsCreationMenu
     {
         [MenuItem("Assets/Create/Text/Text Settings", false, 300, true)]
-        public static void CreateTextSettingsAsset()
+        internal static void CreateTextSettingsAsset()
         {
             string filePath;
             if (Selection.assetGUIDs.Length == 0)

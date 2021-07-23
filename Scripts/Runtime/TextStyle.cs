@@ -1,5 +1,3 @@
-﻿
-
 #pragma warning disable 0649 // Disabled warnings.
 
 namespace UnityEngine.TextCore.Text
@@ -96,7 +94,6 @@ namespace UnityEngine.TextCore.Text
             RefreshStyle();
         }
 
-
         /// <summary>
         /// Function to update the content of the int[] resulting from changes to OpeningDefinition & ClosingDefinition.
         /// </summary>
@@ -122,6 +119,5 @@ namespace UnityEngine.TextCore.Text
                 m_ClosingTagUnicodeArray[i] = m_ClosingDefinition[i];
             }
         }
-
     }
 }

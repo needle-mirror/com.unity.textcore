@@ -1,12 +1,11 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.TextCore.Text;
 
 
-namespace UnityEditor.TextCore
+namespace UnityEditor.TextCore.Text
 {
-
     [CustomPropertyDrawer(typeof(SpriteGlyph))]
-    public class SpriteGlyphPropertyDrawer : PropertyDrawer
+    internal class SpriteGlyphPropertyDrawer : PropertyDrawer
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
@@ -87,6 +86,5 @@ namespace UnityEditor.TextCore
         {
             return 130f;
         }
-
     }
 }

@@ -1,10 +1,10 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.TextCore.Text;
 
-namespace UnityEditor.TextCore
+namespace UnityEditor.TextCore.Text
 {
     [CustomPropertyDrawer(typeof(UnicodeLineBreakingRules))]
-    public class UnicodeLineBreakingRulesPropertyDrawer : PropertyDrawer
+    internal class UnicodeLineBreakingRulesPropertyDrawer : PropertyDrawer
     {
         static readonly GUIContent s_KoreanSpecificRules = new GUIContent("Use Modern Rules", "Determines if traditional or modern line breaking rules will be used to control line breaking. Traditional line breaking rules use the Leading and Following Character rules whereas Modern uses spaces for line breaking.");
 

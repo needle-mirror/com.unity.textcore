@@ -1,12 +1,11 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.TextCore;
 
 
-namespace UnityEditor.TextCore
+namespace UnityEditor.TextCore.Text
 {
-
     [CustomPropertyDrawer(typeof(GlyphMetrics))]
-    public class GlyphMetricsPropertyDrawer : PropertyDrawer
+    internal class GlyphMetricsPropertyDrawer : PropertyDrawer
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
@@ -38,7 +37,6 @@ namespace UnityEditor.TextCore
             EditorGUI.PropertyField(new Rect(rect.x + width * 2, rect.y + 40, width - 5f, 18), prop_HoriAdvance, new GUIContent("AD:"));
             if (EditorGUI.EndChangeCheck())
             {
-
             }
         }
 
@@ -46,6 +44,5 @@ namespace UnityEditor.TextCore
         {
             return 65f;
         }
-
     }
 }

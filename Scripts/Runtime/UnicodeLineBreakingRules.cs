@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 
@@ -45,19 +45,31 @@ namespace UnityEngine.TextCore.Text
         /// <summary>
         ///
         /// </summary>
-        public HashSet<uint> leadingCharactersLookup
+        internal HashSet<uint> leadingCharactersLookup
         {
-            get => s_LeadingCharactersLookup;
-            internal set => s_LeadingCharactersLookup = value;
+            get
+            {
+                if (s_LeadingCharactersLookup == null)
+                    LoadLineBreakingRules();
+
+                return s_LeadingCharactersLookup;
+            }
+            set => s_LeadingCharactersLookup = value;
         }
 
         /// <summary>
         ///
         /// </summary>
-        public HashSet<uint> followingCharactersLookup
+        internal HashSet<uint> followingCharactersLookup
         {
-            get => s_FollowingCharactersLookup;
-            internal set => s_FollowingCharactersLookup = value;
+            get
+            {
+                if (s_LeadingCharactersLookup == null)
+                    LoadLineBreakingRules();
+
+                return s_FollowingCharactersLookup;
+            }
+            set => s_FollowingCharactersLookup = value;
         }
 
         /// <summary>
@@ -81,19 +93,23 @@ namespace UnityEngine.TextCore.Text
         /// <summary>
         ///
         /// </summary>
-        public static void LoadLineBreakingRules()
+        internal static void LoadLineBreakingRules()
         {
             if (s_LeadingCharactersLookup == null)
             {
-                UnityEngine.TextAsset leadingRules = Resources.Load<UnityEngine.TextAsset>("LineBreaking Leading Characters");
-                s_LeadingCharactersLookup = leadingRules != null ? GetCharacters(leadingRules) : new HashSet<uint>();
+                if (s_Instance.m_LeadingCharacters == null)
+                    s_Instance.m_LeadingCharacters = Resources.Load<UnityEngine.TextAsset>("LineBreaking Leading Characters");
 
-                UnityEngine.TextAsset followingRules = Resources.Load<UnityEngine.TextAsset>("LineBreaking Following Characters");
-                s_FollowingCharactersLookup = followingRules != null ? GetCharacters(followingRules) : new HashSet<uint>();
+                s_LeadingCharactersLookup = s_Instance.m_LeadingCharacters != null ? GetCharacters(s_Instance.m_LeadingCharacters) : new HashSet<uint>();
+
+                if (s_Instance.m_FollowingCharacters == null)
+                    s_Instance.m_FollowingCharacters = Resources.Load<UnityEngine.TextAsset>("LineBreaking Following Characters");
+
+                s_FollowingCharactersLookup = s_Instance.m_FollowingCharacters != null ? GetCharacters(s_Instance.m_FollowingCharacters) : new HashSet<uint>();
             }
         }
 
-        public static void LoadLineBreakingRules(UnityEngine.TextAsset leadingRules, UnityEngine.TextAsset followingRules)
+        internal static void LoadLineBreakingRules(UnityEngine.TextAsset leadingRules, UnityEngine.TextAsset followingRules)
         {
             if (s_LeadingCharactersLookup == null)
             {

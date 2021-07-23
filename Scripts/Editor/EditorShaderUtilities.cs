@@ -1,18 +1,17 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEditor;
 
 
-namespace UnityEditor.TextCore
+namespace UnityEditor.TextCore.Text
 {
-    public static class EditorShaderUtilities
+    internal static class EditorShaderUtilities
     {
-
         /// <summary>
         /// Copy Shader properties from source to destination material.
         /// </summary>
         /// <param name="source"></param>
         /// <returns></returns>
-        public static void CopyMaterialProperties(Material source, Material destination)
+        internal static void CopyMaterialProperties(Material source, Material destination)
         {
             MaterialProperty[] source_prop = MaterialEditor.GetMaterialProperties(new Object[] { source });
 
@@ -42,9 +41,6 @@ namespace UnityEditor.TextCore
                     }
                 }
             }
-
         }
-
     }
-
 }

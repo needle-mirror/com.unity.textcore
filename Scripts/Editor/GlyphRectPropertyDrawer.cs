@@ -1,11 +1,11 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.TextCore;
 
 
-namespace UnityEditor.TextCore
+namespace UnityEditor.TextCore.Text
 {
     [CustomPropertyDrawer(typeof(GlyphRect))]
-    public class GlyphRectPropertyDrawer : PropertyDrawer
+    internal class GlyphRectPropertyDrawer : PropertyDrawer
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {

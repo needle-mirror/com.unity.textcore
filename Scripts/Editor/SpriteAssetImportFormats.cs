@@ -1,12 +1,12 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections.Generic;
 
 
-namespace UnityEditor.TextCore
+namespace UnityEditor.TextCore.Text
 {
-    public enum SpriteAssetImportFormats { None = 0, TexturePackerJsonArray = 0x1 };
+    internal enum SpriteAssetImportFormats { None = 0, TexturePackerJsonArray = 0x1 };
 
-    public class TexturePacker_JsonArray
+    internal class TexturePacker_JsonArray
     {
         [System.Serializable]
         public struct SpriteFrame

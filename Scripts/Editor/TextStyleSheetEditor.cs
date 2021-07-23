@@ -1,10 +1,9 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.TextCore.Text;
 
 
-namespace UnityEditor.TextCore
+namespace UnityEditor.TextCore.Text
 {
-
     [CustomPropertyDrawer(typeof(TextStyle))]
     public class TextStylePropertyDrawer : PropertyDrawer
     {
@@ -99,16 +98,13 @@ namespace UnityEditor.TextCore
                     element.intValue = closingDefinitionProperty.stringValue[i];
                 }
             }
-
         }
     }
-
 
 
     [CustomEditor(typeof(TextStyleSheet)), CanEditMultipleObjects]
     public class TextStyleSheetEditor : Editor
     {
-
         TextStyleSheet m_StyleSheet;
         SerializedProperty m_StyleListProp;
 
@@ -123,7 +119,6 @@ namespace UnityEditor.TextCore
             m_StyleSheet = target as TextStyleSheet;
             m_StyleListProp = serializedObject.FindProperty("m_StyleList");
         }
-
 
         public override void OnInspectorGUI()
         {
@@ -286,9 +281,7 @@ namespace UnityEditor.TextCore
             GUI.enabled = true;
             if (currentEvent.type == EventType.MouseDown && currentEvent.button == 0)
                 m_SelectedElement = -1;
-
         }
-
 
         // Check if any of the Style elements were clicked on.
         static bool DoSelectionCheck(Rect selectionArea)
@@ -315,6 +308,5 @@ namespace UnityEditor.TextCore
             m_SelectedElement = newIndex;
             m_IsStyleSheetDirty = true;
         }
-
     }
 }

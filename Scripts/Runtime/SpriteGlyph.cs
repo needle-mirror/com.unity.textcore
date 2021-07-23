@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 
 namespace UnityEngine.TextCore.Text
@@ -19,7 +19,7 @@ namespace UnityEngine.TextCore.Text
         // CONSTRUCTORS
         // ********************
 
-        public SpriteGlyph() { }
+        public SpriteGlyph() {}
 
         /// <summary>
         /// Constructor for new sprite glyph.

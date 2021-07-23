@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
@@ -8,16 +8,16 @@ using GlyphRect = UnityEngine.TextCore.GlyphRect;
 using GlyphMetrics = UnityEngine.TextCore.GlyphMetrics;
 
 
-namespace UnityEditor.TextCore
+namespace UnityEditor.TextCore.Text
 {
-    public class SpriteAssetImporter : EditorWindow
+    internal class SpriteAssetImporter : EditorWindow
     {
         // Create Sprite Asset Editor Window
         #if TEXTMESHPRO_4_0_OR_NEWER
         [MenuItem("Window/TextMeshPro/Sprite Importer", false, 2026)]
         #endif
         [MenuItem("Window/Text/Sprite Importer", false, 2026)]
-        public static void ShowFontAtlasCreatorWindow()
+        internal static void ShowFontAtlasCreatorWindow()
         {
             var window = GetWindow<SpriteAssetImporter>();
             window.titleContent = new GUIContent("Sprite Importer");

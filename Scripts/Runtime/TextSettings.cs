@@ -1,16 +1,13 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine.Serialization;
 using UnityEngine.TextCore.LowLevel;
 
 
 namespace UnityEngine.TextCore.Text
 {
-    [System.Serializable][ExcludeFromPresetAttribute]
+    [System.Serializable][ExcludeFromPresetAttribute][ExcludeFromObjectFactory]
     public class TextSettings : ScriptableObject
     {
-        private static TextSettings s_Instance;
-        private static TextSettings s_DefaultTextSettings;
-
         /// <summary>
         /// The version of the TextSettings class.
         /// Version 1.2.0 was introduced with the TextCore package
@@ -78,6 +75,17 @@ namespace UnityEngine.TextCore.Text
         }
         [FormerlySerializedAs("m_missingGlyphCharacter")][SerializeField]
         protected int m_MissingCharacterUnicode;
+
+        /// <summary>
+        /// Determines if the "Clear Dynamic Data on Build" property will be set to true or false on newly created dynamic font assets.
+        /// </summary>
+        public bool clearDynamicDataOnBuild
+        {
+            get => m_ClearDynamicDataOnBuild;
+            set => m_ClearDynamicDataOnBuild = value;
+        }
+        [SerializeField]
+        protected bool m_ClearDynamicDataOnBuild = true;
 
         /// <summary>
         /// The Sprite Asset to be used by default.
@@ -171,7 +179,10 @@ namespace UnityEngine.TextCore.Text
             get
             {
                 if (m_UnicodeLineBreakingRules == null)
+                {
+                    m_UnicodeLineBreakingRules = new UnicodeLineBreakingRules();
                     UnicodeLineBreakingRules.LoadLineBreakingRules();
+                }
 
                 return m_UnicodeLineBreakingRules;
             }
@@ -205,6 +216,9 @@ namespace UnityEngine.TextCore.Text
         //
         // =============================================
 
+        //private static TextSettings s_Instance;
+        //private static TextSettings s_DefaultTextSettings;
+
         // public static TextSettings instance
         // {
         //     get
@@ -235,7 +249,10 @@ namespace UnityEngine.TextCore.Text
                     continue;
                 }
 
-                m_FontLookup.Add(fontRef.font.GetInstanceID(), fontRef.fontAsset);
+                int id = fontRef.font.GetInstanceID();
+
+                if (!m_FontLookup.ContainsKey(id))
+                    m_FontLookup.Add(id, fontRef.fontAsset);
             }
         }
 
@@ -252,26 +269,49 @@ namespace UnityEngine.TextCore.Text
             }
         }
 
-        private Dictionary<int, FontAsset> m_FontLookup = new Dictionary<int, FontAsset>();
+        private Dictionary<int, FontAsset> m_FontLookup;
         private List<FontReferenceMap> m_FontReferences = new List<FontReferenceMap>();
 
         protected FontAsset GetCachedFontAssetInternal(Font font)
         {
+            if (m_FontLookup == null)
+            {
+                m_FontLookup = new Dictionary<int, FontAsset>();
+                InitializeFontReferenceLookup();
+            }
+
             int id = font.GetInstanceID();
 
             if (m_FontLookup.ContainsKey(id))
                 return m_FontLookup[id];
 
-            //Debug.Log("Creating new Dynamic Runtime Font Asset for [" + font.name + "].");
+            FontAsset fontAsset;
+            if (font.name == "System Normal")
+            {
+                #if UNITY_EDITOR_WIN
+                fontAsset = FontAsset.CreateFontAsset("Verdana", "Regular");
+                #elif UNITY_EDITOR_LINUX
+                fontAsset = FontAsset.CreateFontAsset("Liberation Sans", "Regular");
+                #else
+                fontAsset = FontAsset.CreateFontAsset("Lucida Grande", "Regular");
+                #endif
+            }
+            else
+            {
+                //Debug.Log("Creating new Dynamic Runtime Font Asset for [" + font.name + "].");
+                fontAsset = FontAsset.CreateFontAsset(font, 90, 9, GlyphRenderMode.SDFAA, 1024, 1024, AtlasPopulationMode.Dynamic);
+            }
 
-            FontAsset fontAsset = FontAsset.CreateFontAsset(font, 90, 9, GlyphRenderMode.SDFAA, 1024, 1024, AtlasPopulationMode.Dynamic);
-            fontAsset.hideFlags = HideFlags.DontSave;
-            fontAsset.atlasTextures[0].hideFlags = HideFlags.DontSave;
-            fontAsset.material.hideFlags = HideFlags.DontSave;
-            fontAsset.isMultiAtlasTexturesEnabled = true;
+            if (fontAsset != null)
+            {
+                fontAsset.hideFlags = HideFlags.DontSave;
+                fontAsset.atlasTextures[0].hideFlags = HideFlags.DontSave;
+                fontAsset.material.hideFlags = HideFlags.DontSave;
+                fontAsset.isMultiAtlasTexturesEnabled = true;
 
-            m_FontReferences.Add(new FontReferenceMap(font, fontAsset));
-            m_FontLookup.Add(id, fontAsset);
+                m_FontReferences.Add(new FontReferenceMap(font, fontAsset));
+                m_FontLookup.Add(id, fontAsset);
+            }
 
             return fontAsset;
         }

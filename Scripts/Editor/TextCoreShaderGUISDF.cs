@@ -1,8 +1,8 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.TextCore.Text;
 
 
-namespace UnityEditor.TextCore
+namespace UnityEditor.TextCore.Text
 {
     public class TextCoreShaderGUISDF : TextCoreShaderGUI
     {
@@ -10,9 +10,8 @@ namespace UnityEditor.TextCore
 
         static bool s_Face = true, s_Outline = true, s_Outline2, s_Underlay, s_Lighting, s_Glow, s_Bevel, s_Light, s_Bump, s_Env;
 
-        static string[]
-            s_FaceUvSpeedNames = { "_FaceUVSpeedX", "_FaceUVSpeedY" },
-            s_OutlineUvSpeedNames = { "_OutlineUVSpeedX", "_OutlineUVSpeedY" };
+        static string[] s_FaceUvSpeedNames = { "_FaceUVSpeedX", "_FaceUVSpeedY" },
+                        s_OutlineUvSpeedNames = { "_OutlineUVSpeedX", "_OutlineUVSpeedY" };
 
         static TextCoreShaderGUISDF()
         {

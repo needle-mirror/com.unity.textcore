@@ -1,14 +1,7 @@
-
-
 namespace UnityEngine.TextCore.Text
 {
-    public enum Compute_DistanceTransform_EventTypes { Processing, Completed };
-
-
     public static class TextEventManager
     {
-        //public static readonly FastAction<object, Compute_DT_EventArgs> COMPUTE_DT_EVENT = new FastAction<object, Compute_DT_EventArgs>();
-
         // Event & Delegate used to notify TextMesh Pro objects that Material properties have been changed.
         public static readonly FastAction<bool, Material> MATERIAL_PROPERTY_EVENT = new FastAction<bool, Material>();
 
@@ -35,7 +28,6 @@ namespace UnityEngine.TextCore.Text
         public static readonly FastAction<Object> TEXT_CHANGED_EVENT = new FastAction<Object>();
 
         //public static readonly FastAction FONT_ASSET_DESTROYED_EVENT = new FastAction();
-
 
 
         //static TMPro_EventManager()
@@ -85,7 +77,6 @@ namespace UnityEngine.TextCore.Text
             COLOR_GRADIENT_PROPERTY_EVENT.Call(gradient);
         }
 
-
         public static void ON_TEXT_CHANGED(Object obj)
         {
             TEXT_CHANGED_EVENT.Call(obj);
@@ -121,33 +112,5 @@ namespace UnityEngine.TextCore.Text
         //    if (PROGRESS_BAR_EVENT != null)
         //        PROGRESS_BAR_EVENT(event_type, eventArgs);
         //}
-
-        //public static void ON_COMPUTE_DT_EVENT(object Sender, Compute_DT_EventArgs e)
-        //{
-        //    COMPUTE_DT_EVENT.Call(Sender, e);
-        //}
     }
-
-
-    /*public class Compute_DT_EventArgs
-    {
-        public Compute_DistanceTransform_EventTypes EventType;
-        public float ProgressPercentage;
-        public Color[] Colors;
-
-
-        public Compute_DT_EventArgs(Compute_DistanceTransform_EventTypes type, float progress)
-        {
-            EventType = type;
-            ProgressPercentage = progress;
-        }
-
-        public Compute_DT_EventArgs(Compute_DistanceTransform_EventTypes type, Color[] colors)
-        {
-            EventType = type;
-            Colors = colors;
-        }
-
-    }*/
-
 }

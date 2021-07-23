@@ -1,12 +1,12 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 
 namespace UnityEngine.TextCore.Text
 {
-     /// <summary>
+    /// <summary>
     /// Structure used to track basic XML tags which are binary (on / off)
     /// </summary>
-    public struct FontStyleStack
+    internal struct FontStyleStack
     {
         public byte bold;
         public byte italic;
@@ -142,7 +142,7 @@ namespace UnityEngine.TextCore.Text
     /// </summary>
     /// <typeparam name="T"></typeparam>
     [DebuggerDisplay("Item count = {m_Count}")]
-    public struct TextProcessingStack<T>
+    internal struct TextProcessingStack<T>
     {
         public T[] itemStack;
         public int index;
@@ -170,7 +170,6 @@ namespace UnityEngine.TextCore.Text
             m_Count = 0;
         }
 
-
         /// <summary>
         /// Constructor for a new item stack with the given capacity.
         /// </summary>
@@ -186,7 +185,6 @@ namespace UnityEngine.TextCore.Text
             m_Count = 0;
         }
 
-
         public TextProcessingStack(int capacity, int rolloverSize)
         {
             itemStack = new T[capacity];
@@ -197,7 +195,6 @@ namespace UnityEngine.TextCore.Text
             m_DefaultItem = default;
             m_Count = 0;
         }
-
 
         /// <summary>
         ///
@@ -240,6 +237,17 @@ namespace UnityEngine.TextCore.Text
 
 
         /// <summary>
+        /// Set stack elements to default item.
+        /// </summary>
+        /// <param name="stack">The stack of elements.</param>
+        /// <param name="item"></param>
+        internal static void SetDefault(TextProcessingStack<T>[] stack, T item)
+        {
+            for (int i = 0; i < stack.Length; i++)
+                stack[i].SetDefault(item);
+        }
+
+        /// <summary>
         /// Function to clear and reset stack to first item.
         /// </summary>
         public void Clear()
@@ -247,7 +255,6 @@ namespace UnityEngine.TextCore.Text
             index = 0;
             m_Count = 0;
         }
-
 
         /// <summary>
         /// Function to set the first item on the stack and reset index.
@@ -266,7 +273,6 @@ namespace UnityEngine.TextCore.Text
             index = 1;
         }
 
-
         /// <summary>
         /// Function to add a new item to the stack.
         /// </summary>
@@ -280,7 +286,6 @@ namespace UnityEngine.TextCore.Text
             }
         }
 
-
         /// <summary>
         /// Function to retrieve an item from the stack.
         /// </summary>
@@ -293,7 +298,6 @@ namespace UnityEngine.TextCore.Text
             {
                 index = 1;
                 return itemStack[0];
-
             }
 
             return itemStack[index - 1];
@@ -322,7 +326,6 @@ namespace UnityEngine.TextCore.Text
                 index = (index + 1) % m_RolloverSize;
                 m_Count = m_Count < m_RolloverSize ? m_Count + 1 : m_RolloverSize;
             }
-
         }
 
         public T Pop()
@@ -358,7 +361,6 @@ namespace UnityEngine.TextCore.Text
             return itemStack[index - 1];
         }
 
-
         /// <summary>
         /// Function to retrieve the current item from the stack.
         /// </summary>
@@ -370,7 +372,6 @@ namespace UnityEngine.TextCore.Text
 
             return itemStack[0];
         }
-
 
         /// <summary>
         /// Function to retrieve the previous item without affecting the stack.

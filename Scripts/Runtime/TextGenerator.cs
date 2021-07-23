@@ -2768,7 +2768,7 @@ namespace UnityEngine.TextCore.Text
                     // Compute hashcode value for tag and attribute names
                     if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || c == '/' || c == '-')
                     {
-                        m_Attributes[attributeIndex].nameHashCode = ((m_Attributes[attributeIndex].nameHashCode << 5) + m_Attributes[attributeIndex].nameHashCode) ^ (int)TextCore.TextUtilities.ToUpperASCIIFast(c);
+                        m_Attributes[attributeIndex].nameHashCode = ((m_Attributes[attributeIndex].nameHashCode << 5) + m_Attributes[attributeIndex].nameHashCode) ^ (int)TextUtilities.ToUpperASCIIFast(c);
                         continue;
                     }
 
@@ -2847,7 +2847,7 @@ namespace UnityEngine.TextCore.Text
                     }
 
                     // Compute Hashcode value irrespective of the value type
-                    m_Attributes[attributeIndex].valueHashCode = ((m_Attributes[attributeIndex].valueHashCode << 5) + m_Attributes[attributeIndex].valueHashCode) ^ (int)TextCore.TextUtilities.ToUpperASCIIFast(c);
+                    m_Attributes[attributeIndex].valueHashCode = ((m_Attributes[attributeIndex].valueHashCode << 5) + m_Attributes[attributeIndex].valueHashCode) ^ (int)TextUtilities.ToUpperASCIIFast(c);
 
                     m_Attributes[attributeIndex].valueLength += 1;
                 }
@@ -2948,7 +2948,7 @@ namespace UnityEngine.TextCore.Text
                             tagType = TagValueType.StringValue;
                             m_XmlAttribute[attributeIndex].valueType = TagValueType.StringValue;
                             m_XmlAttribute[attributeIndex].valueStartIndex = tagCharCount - 1;
-                            m_XmlAttribute[attributeIndex].valueHashCode = (m_XmlAttribute[attributeIndex].valueHashCode << 5) + m_XmlAttribute[attributeIndex].valueHashCode ^ (int)TextCore.TextUtilities.ToUpperASCIIFast(unicode);
+                            m_XmlAttribute[attributeIndex].valueHashCode = (m_XmlAttribute[attributeIndex].valueHashCode << 5) + m_XmlAttribute[attributeIndex].valueHashCode ^ (int)TextUtilities.ToUpperASCIIFast(unicode);
                             m_XmlAttribute[attributeIndex].valueLength += 1;
                         }
                     }
@@ -3001,7 +3001,7 @@ namespace UnityEngine.TextCore.Text
                             // Compute HashCode value for the named tag.
                             if (unicode != '"')
                             {
-                                m_XmlAttribute[attributeIndex].valueHashCode = (m_XmlAttribute[attributeIndex].valueHashCode << 5) + m_XmlAttribute[attributeIndex].valueHashCode ^ (int)TextCore.TextUtilities.ToUpperASCIIFast(unicode);
+                                m_XmlAttribute[attributeIndex].valueHashCode = (m_XmlAttribute[attributeIndex].valueHashCode << 5) + m_XmlAttribute[attributeIndex].valueHashCode ^ (int)TextUtilities.ToUpperASCIIFast(unicode);
                                 m_XmlAttribute[attributeIndex].valueLength += 1;
                             }
                             else
@@ -3041,7 +3041,7 @@ namespace UnityEngine.TextCore.Text
                 }
 
                 if (attributeFlag == 0)
-                    m_XmlAttribute[attributeIndex].nameHashCode = (m_XmlAttribute[attributeIndex].nameHashCode << 5) + m_XmlAttribute[attributeIndex].nameHashCode ^ (int)TextCore.TextUtilities.ToUpperASCIIFast(unicode);
+                    m_XmlAttribute[attributeIndex].nameHashCode = (m_XmlAttribute[attributeIndex].nameHashCode << 5) + m_XmlAttribute[attributeIndex].nameHashCode ^ (int)TextUtilities.ToUpperASCIIFast(unicode);
 
                 if (attributeFlag == 2 && unicode == ' ')
                     attributeFlag = 0;
@@ -4617,8 +4617,8 @@ namespace UnityEngine.TextCore.Text
             // Center of the underline + small padding
             uvs0[0 + index] = uv0 + new Vector2(-0.0001f, -0.0001f); // BL
             uvs0[1 + index] = uv0 + new Vector2(-0.0001f,  0.0001f); // TL
-            uvs0[2 + index] = uv0 + new Vector2( 0.0001f,  0.0001f); // TR
-            uvs0[3 + index] = uv0 + new Vector2( 0.0001f, -0.0001f); // BR
+            uvs0[2 + index] = uv0 + new Vector2(0.0001f,  0.0001f);  // TR
+            uvs0[3 + index] = uv0 + new Vector2(0.0001f, -0.0001f);  // BR
 
             // UNDERLINE UV2
             Vector2[] uvs2 = textInfo.meshInfo[underlineMaterialIndex].uvs2;
@@ -4962,7 +4962,7 @@ namespace UnityEngine.TextCore.Text
             if (character != null)
             {
                 // Add character to font asset lookup cache
-                //fontAsset.AddCharacterToLookupCache(unicode, character);
+                fontAsset.AddCharacterToLookupCache(unicode, character);
 
                 return character;
             }
@@ -4980,7 +4980,7 @@ namespace UnityEngine.TextCore.Text
                     m_CurrentMaterial = m_MaterialReferences[0].material;
 
                     // Add character to font asset lookup cache
-                    //fontAsset.AddCharacterToLookupCache(unicode, character);
+                    fontAsset.AddCharacterToLookupCache(unicode, character);
 
                     return character;
                 }
@@ -4992,7 +4992,7 @@ namespace UnityEngine.TextCore.Text
                 if (character != null)
                 {
                     // Add character to font asset lookup cache
-                    //fontAsset.AddCharacterToLookupCache(unicode, character);
+                    fontAsset.AddCharacterToLookupCache(unicode, character);
 
                     return character;
                 }
@@ -5014,7 +5014,7 @@ namespace UnityEngine.TextCore.Text
             if (character != null)
             {
                 // Add character to font asset lookup cache
-                //fontAsset.AddCharacterToLookupCache(unicode, character);
+                fontAsset.AddCharacterToLookupCache(unicode, character);
 
                 return character;
             }
@@ -5026,7 +5026,7 @@ namespace UnityEngine.TextCore.Text
             if (character != null)
             {
                 // Add character to font asset lookup cache
-                //fontAsset.AddCharacterToLookupCache(unicode, character);
+                fontAsset.AddCharacterToLookupCache(unicode, character);
 
                 return character;
             }

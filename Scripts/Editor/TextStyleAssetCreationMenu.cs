@@ -1,17 +1,17 @@
-﻿using System.IO;
+using System.IO;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
 
 
-namespace UnityEditor.TextCore
+namespace UnityEditor.TextCore.Text
 {
-    public static class TextStyleAssetCreationMenu
+    internal static class TextStyleAssetCreationMenu
     {
         #if TEXTMESHPRO_4_0_OR_NEWER
         [MenuItem("Assets/Create/TextMeshPro/Text StyleSheet", false, 200)]
         #endif
         [MenuItem("Assets/Create/Text/Text StyleSheet", false, 200)]
-        public static void CreateTextMeshProObjectPerform()
+        internal static void CreateTextMeshProObjectPerform()
         {
             string filePath;
             if (Selection.assetGUIDs.Length == 0)
@@ -52,5 +52,4 @@ namespace UnityEditor.TextCore
             EditorGUIUtility.PingObject(styleSheet);
         }
     }
-
 }

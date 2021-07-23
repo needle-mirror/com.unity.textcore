@@ -1,4 +1,4 @@
-﻿using UnityEngine.Scripting.APIUpdating;
+using UnityEngine.Scripting.APIUpdating;
 
 namespace UnityEngine.TextCore.Text
 {
@@ -10,7 +10,7 @@ namespace UnityEngine.TextCore.Text
         FourCornersGradient
     }
 
-    [System.Serializable][ExcludeFromPresetAttribute]
+    [System.Serializable][ExcludeFromPresetAttribute][ExcludeFromObjectFactory]
     public class TextColorGradient : ScriptableObject
     {
         public ColorGradientMode colorMode = ColorGradientMode.FourCornersGradient;

@@ -1,11 +1,9 @@
-﻿
-
 namespace UnityEngine.TextCore.Text
 {
     /// <summary>
     /// Rich Text Tags and Attribute definitions and their respective HashCode values.
     /// </summary>
-    public enum MarkupTag : int
+    internal enum MarkupTag : int
     {
         // Rich Text Tags
         BOLD = 66,                          // <b>
@@ -155,7 +153,7 @@ namespace UnityEngine.TextCore.Text
     /// <summary>
     /// Defines the type of value used by a rich text tag or tag attribute.
     /// </summary>
-    public enum TagValueType
+    internal enum TagValueType
     {
         None = 0x0,
         NumericalValue = 0x1,
@@ -163,7 +161,7 @@ namespace UnityEngine.TextCore.Text
         ColorValue = 0x4,
     }
 
-    public enum TagUnitType
+    internal enum TagUnitType
     {
         Pixels = 0x0,
         FontUnits = 0x1,
@@ -173,7 +171,7 @@ namespace UnityEngine.TextCore.Text
     /// <summary>
     /// Commonly referenced Unicode characters in the text generation process.
     /// </summary>
-    public static class Unicode
+    internal static class UnicodeCodePoint
     {
         public const uint SPACE = 0x20;
         public const uint DOUBLE_QUOTE = 0x22;

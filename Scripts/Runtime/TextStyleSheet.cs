@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 
 namespace UnityEngine.TextCore.Text
 {
-    [Serializable][ExcludeFromPresetAttribute]
+    [Serializable][ExcludeFromPresetAttribute][ExcludeFromObjectFactory]
     public class TextStyleSheet : ScriptableObject
     {
         /// <summary>
@@ -89,5 +89,4 @@ namespace UnityEngine.TextCore.Text
             #endif
         }
     }
-
 }

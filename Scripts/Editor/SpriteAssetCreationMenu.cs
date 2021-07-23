@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.TextCore.Text;
 using UnityEngine.U2D;
 using System.Linq;
@@ -9,9 +9,9 @@ using GlyphRect = UnityEngine.TextCore.GlyphRect;
 using GlyphMetrics = UnityEngine.TextCore.GlyphMetrics;
 
 
-namespace UnityEditor.TextCore
+namespace UnityEditor.TextCore.Text
 {
-    public static class SpriteAssetCreationMenu
+    internal static class SpriteAssetCreationMenu
     {
         // Add a Context Menu to the Sprite Asset Editor Panel to Create and Add a Default Material.
         [MenuItem("CONTEXT/SpriteAsset/Add Default Material", true, 2200)]
@@ -166,7 +166,7 @@ namespace UnityEditor.TextCore
         [MenuItem("Assets/Create/TextMeshPro/Sprite Asset", false, 150)]
         #endif
         [MenuItem("Assets/Create/Text/Sprite Asset", false, 150)]
-        public static void CreateSpriteAsset()
+        internal static void CreateSpriteAsset()
         {
             Object target = Selection.activeObject;
 
@@ -181,11 +181,11 @@ namespace UnityEditor.TextCore
             string fileNameWithExtension = Path.GetFileName(filePathWithName);
             string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(filePathWithName);
             string filePath = filePathWithName.Replace(fileNameWithExtension, "");
-
+            string uniqueAssetPath = AssetDatabase.GenerateUniqueAssetPath(filePath + fileNameWithoutExtension + ".asset");
 
             // Create new Sprite Asset
             SpriteAsset spriteAsset = ScriptableObject.CreateInstance<SpriteAsset>();
-            AssetDatabase.CreateAsset(spriteAsset, filePath + fileNameWithoutExtension + ".asset");
+            AssetDatabase.CreateAsset(spriteAsset, uniqueAssetPath);
 
             spriteAsset.version = "1.1.0";
 
@@ -243,7 +243,6 @@ namespace UnityEditor.TextCore
             //AssetDatabase.Refresh();
         }
 
-
         private static void PopulateSpriteTables(Texture source, ref List<SpriteCharacter> spriteCharacterTable, ref List<SpriteGlyph> spriteGlyphTable)
         {
             //Debug.Log("Creating new Sprite Asset.");
@@ -274,7 +273,6 @@ namespace UnityEditor.TextCore
             }
         }
 
-
         private static void PopulateSpriteTables(SpriteAtlas spriteAtlas, ref List<SpriteCharacter> spriteCharacterTable, ref List<SpriteGlyph> spriteGlyphTable)
         {
             // Get number of sprites contained in the sprite atlas.
@@ -304,7 +302,6 @@ namespace UnityEditor.TextCore
                 spriteCharacterTable.Add(spriteCharacter);
             }
         }
-
 
         /// <summary>
         /// Create and add new default material to sprite asset.
